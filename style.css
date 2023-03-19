@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+header {
+    display:flex;
+    justify-content: space-between;
+    margin: 50px 100px;
+}
+
+ 
+  thead {
+   
+    vertical-align: middle;
+  
+   
+
+  }
+  tr, th {
+   font-size: 20px;
+    padding: 15px 50px;
+    
+    
+  }
+
+  
+  .container{
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+  }  
+
+  .not_read {
+    background-color: red;
+  }
+
+  .read {
+    background-color:green;
+  }
