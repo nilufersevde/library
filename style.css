@@ -12,32 +12,27 @@ header {
     margin: 50px 100px;
 }
 
- 
-  thead {
+thead {
    
-    vertical-align: middle;
-  
-   
+  vertical-align: middle;  
+}
 
-  }
-  tr, th {
-   font-size: 20px;
-    padding: 15px 50px;
-    
-    
-  }
+tr, th {
+  font-size: 20px;
+  padding: 15px 50px;
+        
+}
 
-  
-  .container{
-    display: flex;
-    justify-content: center;
-    margin: 50px;
-  }  
+.container{
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+}  
 
-  .not_read {
-    background-color: red;
-  }
+.not_read {
+  background-color: red;
+}
 
-  .read {
-    background-color:green;
-  }
+.read {
+  background-color:green;
+}

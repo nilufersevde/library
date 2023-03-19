@@ -40,8 +40,12 @@ function displayBook() {
 }
 
 function openForm() {
-    document.getElementById("myForm").style.display = "block";
+    document.getElementById("form").style.visibility = "visible";
   }
+
+function  closeForm() {
+    document.getElementById("form").style.visibility = "hidden";
+}
 
 let tolkien = new Book("Lord of The Rings",  "J.R.R Tolkien", "1020","Read")
 myLibrary.push(tolkien);

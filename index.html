@@ -27,8 +27,8 @@
             </tbody>
         </table>
     </div>
-    <div class="form" style="display:none">
-        <button class="close">X</button>
+    <div id="form"   style="visibility:hidden";>
+        <button class="close" onclick="closeForm()">X</button>
         <form action="#" id="form">
             <div>
                 <label for="title">Title</label>
@@ -47,7 +47,6 @@
                 <input type="checkbox" id="read" name="read">
             </div>
             <button type="submit" class="btn-submit">Add Book</button>
-            <button type="button" class="btn-save hidden">Save</button>
         </form>
     <script src="js.js"></script>
 </body>
