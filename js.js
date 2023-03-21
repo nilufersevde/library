@@ -21,16 +21,21 @@ function addBookToLibrary(addedbook) {
 //displaying the books on the page that was added to the myLibrary array
 function displayBook() {
     for (let i=table.rows.length-1; i < myLibrary.length; i++) {
+        //creating the row
         let row = table.insertRow(i);
+        row.classList.add("row")
+        //creating the cells with the added book's values
         let title = row.insertCell(0);
         title.innerHTML = myLibrary[i].title;
+        title.classList.add("th")
         let author = row.insertCell(1);
         author.innerHTML = myLibrary[i].author;
+        author.classList.add("th")
         let page = row.insertCell(2);
         page.innerHTML = myLibrary[i].page;
+        page.classList.add("th")
         //creating and adding toggle property to button that shows if the book was read or not
         let statusbutton = document.createElement("button");
-        console.log(myLibrary[i].read)
         function buttonread() {if (myLibrary[i].read) {
         statusbutton.innerText = "read"
         statusbutton.classList.add("read")}
@@ -38,7 +43,8 @@ function displayBook() {
         statusbutton.innerText = "not read"
         statusbutton.classList.add("not_read")}}
         buttonread()
-        row.append(statusbutton);
+        let cell = row.insertCell();
+        cell.appendChild(statusbutton);
         statusbutton.addEventListener("click", status);
         function status() {
             this.classList.toggle("read");
@@ -49,14 +55,12 @@ function displayBook() {
                 this.innerHTML = "read";
               }
             }
-        let deletebutton = document.createElement("button")
+        //creating the delete button 
+        let deletebutton = document.createElement("button");
         deletebutton.innerText = "X";
-        row.append(deletebutton);
-        deletebutton.addEventListener("click", deleteBook);
-        function deleteBook() {
-          table.deleteRow(i)
-          myLibrary.splice(i, 1)
-        }
+        deletebutton.classList.add("delete_button");
+        let cell2 = row.insertCell();
+        cell2.appendChild(deletebutton);
     }
 }
 
@@ -84,5 +88,17 @@ function  closeForm() {
 
 //adding few books manually to the array to test if everything is working
 let germinal = new Book("Germinal",  "Emile Zola", "850","Read");
+let germina = new Book("Germinal",  "Emile Zola", "850","Read");
 myLibrary.push(germinal);
+myLibrary.push(germina);
 displayBook();
+
+
+
+table.addEventListener('click', function removeBook(e) {
+  if (e.target.classList.contains('delete_button')) {
+    e.target.parentNode.parentNode.remove()
+    myLibrary.splice[(e.target.parentNode.parentNode).rowIndex-1,1]
+    console.log (e.target.parentNode.parentNode.rowIndex)
+  }
+})
