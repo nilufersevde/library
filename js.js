@@ -23,6 +23,8 @@ function displayBook() {
     for (let i=table.rows.length-1; i < myLibrary.length; i++) {
         //creating the row
         let row = table.insertRow(i);
+        row.setAttribute('data-index', i)
+        console.log(row.getAttribute("data-index"))
         row.classList.add("row")
         //creating the cells with the added book's values
         let title = row.insertCell(0);
@@ -66,39 +68,37 @@ function displayBook() {
 
 //functions for hiding and showing the form depending on the pressed button
 function openForm() {
-    document.getElementById("form").style.visibility = "visible";
+    form.style.visibility = "visible";
   }
 
 function  closeForm() {
-    document.getElementById("form").style.visibility = "hidden";
-    document.getElementById("form").reset();
+    form.style.visibility = "hidden";
+    form.reset();
 }
 
+//deletes the row when click on the delete button 
+table.addEventListener('click', function removeBook(e) {
+  if (e.target.classList.contains('delete_button')) {
+    const targetrow = e.target.parentNode.parentNode;
+    targetrow.remove();
+    const index = targetrow.getAttribute('data-index');
+    myLibrary.splice(index,1);
+  }
+})
+
 //function that add the new book to the table when submit the form
-   form.addEventListener("submit", (ev) => {
-      ev.preventDefault();
-      let formData = new FormData(ev.target);
+   form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let formData = new FormData(e.target);
       const formProps = Object.fromEntries(formData);
-      console.log(formProps)//returns an object with name as the key and input as the value
-      addBookToLibrary(formProps)
-      displayBook() 
-      closeForm()
+      console.log(formProps);//returns an object with name as the key and input as the value
+      addBookToLibrary(formProps);
+      displayBook();
+      closeForm();
       }
    )
 
 //adding few books manually to the array to test if everything is working
 let germinal = new Book("Germinal",  "Emile Zola", "850","Read");
-let germina = new Book("Germinal",  "Emile Zola", "850","Read");
 myLibrary.push(germinal);
-myLibrary.push(germina);
 displayBook();
-
-
-
-table.addEventListener('click', function removeBook(e) {
-  if (e.target.classList.contains('delete_button')) {
-    e.target.parentNode.parentNode.remove()
-    myLibrary.splice[(e.target.parentNode.parentNode).rowIndex-1,1]
-    console.log (e.target.parentNode.parentNode.rowIndex)
-  }
-})
