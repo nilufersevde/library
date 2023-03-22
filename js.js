@@ -2,7 +2,9 @@
 const table = document.querySelector("tbody");
 const form = document.querySelector("#form"); 
 const submitButton = document.querySelector(".submit");
-
+const modal = document.querySelector(".modal");
+const big_container = document.querySelector(".big_container");
+const big = document.querySelector(".big");
 //book constructor
 function Book(t, a, p, r){
     this.title=t;
@@ -18,6 +20,17 @@ function addBookToLibrary(addedbook) {
     myLibrary.push(newBook);
 }
 
+//adding few books manually to the array to test if everything is working
+let germinal = new Book("Germinal",  "Emile Zola", "836","Read");
+let pol = new Book("The Sexual Polticis of Meat",  "Carol J. Adams", "450"," Not Read");
+let swan = new Book("Swan's Way",  "Marcel Proust", "494","Read");
+myLibrary.push(germinal);
+myLibrary.push(pol);
+myLibrary.push(swan);
+displayBook();
+
+/*TABLE*/
+
 //displaying the books on the page that was added to the myLibrary array
 function displayBook() {
     for (let i=table.rows.length-1; i < myLibrary.length; i++) {
@@ -29,18 +42,19 @@ function displayBook() {
         //creating the cells with the added book's values
         let title = row.insertCell(0);
         title.innerHTML = myLibrary[i].title;
-        title.classList.add("th")
+        title.classList.add("tb")
         let author = row.insertCell(1);
         author.innerHTML = myLibrary[i].author;
-        author.classList.add("th")
+        author.classList.add("tb")
         let page = row.insertCell(2);
         page.innerHTML = myLibrary[i].page;
-        page.classList.add("th")
+        page.classList.add("tb")
         //creating and adding toggle property to button that shows if the book was read or not
         let statusbutton = document.createElement("button");
         function buttonread() {if (myLibrary[i].read) {
         statusbutton.innerText = "read"
-        statusbutton.classList.add("read")}
+        statusbutton.classList.add("read")
+        }
         else {
         statusbutton.innerText = "not read"
         statusbutton.classList.add("not_read")}}
@@ -66,39 +80,38 @@ function displayBook() {
     }
 }
 
-//functions for hiding and showing the form depending on the pressed button
-function openForm() {
-    form.style.visibility = "visible";
-  }
-
-function  closeForm() {
-    form.style.visibility = "hidden";
-    form.reset();
-}
-
 //deletes the row when click on the delete button 
 table.addEventListener('click', function removeBook(e) {
-  if (e.target.classList.contains('delete_button')) {
+  if (e.target.classList.contains("delete_button")) {
     const targetrow = e.target.parentNode.parentNode;
     targetrow.remove();
-    const index = targetrow.getAttribute('data-index');
+    const index = targetrow.getAttribute("data-index");
     myLibrary.splice(index,1);
   }
 })
 
+/*FORM*/
+
 //function that add the new book to the table when submit the form
-   form.addEventListener("submit", (e) => {
+form.addEventListener("submit", (e) => {
       e.preventDefault();
       let formData = new FormData(e.target);
-      const formProps = Object.fromEntries(formData);
-      console.log(formProps);//returns an object with name as the key and input as the value
-      addBookToLibrary(formProps);
+      const bookObject = Object.fromEntries(formData);
+      console.log(bookObject);//returns an object with name as the key and input as the value
+      addBookToLibrary(bookObject);
       displayBook();
       closeForm();
-      }
-   )
+  }
+)
 
-//adding few books manually to the array to test if everything is working
-let germinal = new Book("Germinal",  "Emile Zola", "850","Read");
-myLibrary.push(germinal);
-displayBook();
+//functions for hiding and showing the form depending on the pressed button
+function openForm() {
+  modal.style.visibility = "visible";
+  big.classList.add("blur");
+  }
+
+function  closeForm() {
+  modal.style.visibility = "hidden";
+  form.reset();
+  big.classList.remove("blur");
+}

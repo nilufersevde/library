@@ -4,32 +4,38 @@
     <meta charset="UTF-8">
     <title>Library</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@1,100&family=Tajawal:wght@300&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <div class="big_container">
-        <header class="header">
-            <div>BookList</div>
-            <button class="AddBook" onclick="openForm()">Add Book</button>
-        </header>
-        <div class="container">
-            <table>
-                <thead>
-                    <tr>
-                    <th class="th">Title</th>
-                    <th class="th">Author</th> 
-                    <th class="th">Pages</th>
-                    <th class="th status">Status</th>
-                    <th class="th"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="big">
+        <div class="big_container">
+            <header class="header">
+                <div>BookList</div>
+                <button class="addbook" onclick="openForm()">Add</button>
+            </header>
+            <div class="container">
+                <table>
+                    <thead>
+                        <tr>
+                        <th class="th">Title</th>
+                        <th class="th">Author</th> 
+                        <th class="th pages">Pages</th>
+                        <th class="th status">Status</th>
+                        <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <div class="form_container"   style="visibility:hidden";>
+    </div>  
+    <div class="modal"   style="visibility:hidden";>
         <button class="close" onclick="closeForm()">X</button>
         <form action="#" id="form">
             <div>
@@ -44,7 +50,7 @@
                 <label for="page">Pages</label>
                 <input type="number" id="page" name="page">
             </div>
-            <div>
+            <div class="not">
                 <label for="read">Have you read it?</label>
                 <input type="checkbox" id="read" name="read">
             </div>
