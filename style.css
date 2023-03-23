@@ -118,7 +118,7 @@ tr {
   box-shadow: 0px 2px 0px 0px rgb(99, 99, 130,0.800);
 }
 
-.read:hover, .not_read:hover,  .addbook:hover {
+.read:hover, .not_read:hover,  .addbook:hover, .submit {
   transform: scale(1.1);
   cursor: pointer;
 }
@@ -210,3 +210,4 @@ form div:not(.not) {
   padding: 5px;
   border:none;
  }
+
