@@ -18,6 +18,7 @@ let myLibrary = [];
 function addBookToLibrary(addedbook) {
     const newBook = new Book(addedbook.author, addedbook.title, addedbook.page, addedbook.read);
     myLibrary.push(newBook);
+    newBook.id = myLibrary.indexOf(newBook);
 }
 
 //adding few books manually to the array to test if everything is working
@@ -36,13 +37,13 @@ function displayBook() {
     for (let i=table.rows.length-1; i < myLibrary.length; i++) {
         //creating the row
         let row = table.insertRow(i);
-        row.setAttribute('data-index', i)
-        console.log(row.getAttribute("data-index"))
-        row.classList.add("row")
+        row.setAttribute('data-index', i);
+        console.log(row.getAttribute("data-index"));
+        row.classList.add("row");
         //creating the cells with the added book's values
         let title = row.insertCell(0);
         title.innerHTML = myLibrary[i].title;
-        title.classList.add("tb")
+        title.classList.add("tb");
         let author = row.insertCell(1);
         author.innerHTML = myLibrary[i].author;
         author.classList.add("tb")
@@ -85,7 +86,9 @@ table.addEventListener('click', function removeBook(e) {
   if (e.target.classList.contains("delete_button")) {
     const targetrow = e.target.parentNode.parentNode;
     targetrow.remove();
-    const index = targetrow.getAttribute("data-index");
+    const dataindex = targetrow.getAttribute("data-index");
+    const targetedbook = myLibrary.find(item => item.id == dataindex);
+    index = myLibrary.indexOf(targetedbook);
     myLibrary.splice(index,1);
   }
 })
@@ -97,7 +100,7 @@ form.addEventListener("submit", (e) => {
       e.preventDefault();
       let formData = new FormData(e.target);
       const bookObject = Object.fromEntries(formData);
-      console.log(bookObject);//returns an object with name as the key and input as the value
+      console.log(bookObject);
       addBookToLibrary(bookObject);
       displayBook();
       closeForm();
